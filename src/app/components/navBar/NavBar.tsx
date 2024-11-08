@@ -1,4 +1,5 @@
-import Link from "next/link"
+import Link from "next/link";
+import "./navBar.css";
 export default function NavBar() {
     return (
         <>

@@ -1,0 +1,10 @@
+form{
+   display: flex;
+   flex-direction: column;
+}
+
+.btnSiguiente{
+    border-radius: 1rem;
+    background-color: aqua;
+    color: black;
+}

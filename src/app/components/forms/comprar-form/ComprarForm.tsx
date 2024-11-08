@@ -1,10 +1,29 @@
+'use client';
 import { useCiudades } from "@/app/hooks/useCiudades";
 import { useEmpresas } from "@/app/hooks/useEmpresas";
 import { useState } from "react";
+import "./formulaarioStyle.css";
+//tipo dato formulario
+interface formData {
+    empresa: {
+        nombre: string
+    }, destino: {
+        ciudadPartida: string,
+        ciudadDestino: string
+    }, pasajero: {
+        nombre: string,
+        apellido: string,
+        dni: string
+    }, fecha: string, cantPasajes: string, enviado: boolean
+}
+interface formProps {
+    response: (data: formData) => void;
+}
 
 
-export default function ComprarForm() {
-    const [form, setform] = useState({
+
+export default function ComprarForm({ response}: formProps) {
+    const [form, setform] = useState<formData>({
         empresa: {
             nombre: "",
         }, destino: {
@@ -15,20 +34,18 @@ export default function ComprarForm() {
             apellido: "",
             dni: "",
         }, fecha: "",
-        cantPasajes: ""
+        cantPasajes: "", enviado:false
     });
 
-    const urlPrincipal = 'http://localhost:8080/admin/';
-    const metodo = 'GET';
-    const { datosCiudades } = useCiudades(urlPrincipal + "ciudad",metodo);
-    const { datosEmpresas } = useEmpresas(urlPrincipal + "empresa",metodo);
+    const { datosCiudades } = useCiudades();
+    const { allEmpresas } = useEmpresas();
     //Funciones handle input form
-    const handleSubmit = (e:any) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(form);
+        response(form);
     }
 
-    const changeEmpresa = (e:any) => {
+    const changeEmpresa = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setform(
             {
                 ...form,
@@ -39,7 +56,7 @@ export default function ComprarForm() {
             });
     }
 
-    const changeCiudadPartida = (e:any) => {
+    const changeCiudadPartida = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setform(
             {
                 ...form,
@@ -50,7 +67,7 @@ export default function ComprarForm() {
             })
     }
 
-    const changeCiudadDestino = (e:any) => {
+    const changeCiudadDestino = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setform({
             ...form,
             destino: {
@@ -60,7 +77,7 @@ export default function ComprarForm() {
         })
     }
 
-    const changeNom = (e:any) => {
+    const changeNom = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setform({
             ...form,
             pasajero: {
@@ -70,7 +87,7 @@ export default function ComprarForm() {
         })
     }
 
-    const changeApe = (e:any) => {
+    const changeApe = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setform({
             ...form,
             pasajero: {
@@ -80,7 +97,7 @@ export default function ComprarForm() {
         })
     }
 
-    const changeDni = (e:any) => {
+    const changeDni = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setform({
             ...form,
             pasajero: {
@@ -90,67 +107,86 @@ export default function ComprarForm() {
         })
     }
 
-    const changeFecha = (e:any) => {
+    const changeFecha = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setform({
             ...form,
             fecha: e.target.value,
         })
     }
 
-    const changeCantPasajes = (e:any) => {
+    const changeCantPasajes = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setform({
             ...form,
             cantPasajes: e.target.value,
         })
     }
 
+    const changeEnviado = (e: React.FormEvent) =>{
+        setform({
+            ...form,
+            enviado: true,
+        })
+    }
     return (
         <>
-            <h3>Componente Comprar Form</h3>
             <form method="POST" action="" onSubmit={handleSubmit}>
-                <label>Ciudad de Partida:</label>
-                <select onChange={changeCiudadPartida}>
-                    <option defaultValue="">Seleccionar Ciudad</option>
-                    {datosCiudades.map((c:any) => (<option key={c.id} value={c.nombre}>{c.nombre}</option>))}
-                </select>
-                <br />
-                <label>Ciudad de Destino:</label>
-                <select onChange={changeCiudadDestino}>
-                    <option defaultValue="">Seleccionar Ciudad</option>
-                    {datosCiudades.map((c:any) => {
-                        return (<option key={c.id} value={c.nombre}>{c.nombre + ' ' + c.localidad}</option>)
-                    })}
-                </select>
-                <br />
-                <label>Empresa de Viaje:</label>
-                <select onChange={changeEmpresa}>
-                    <option defaultValue="">Seleccionar</option>
-                    {datosEmpresas.map((e:any) => {
-                        return (<option key={e.id} value={e.nombre}>{e.nombre}</option>)
-                    })}
-                </select>
-                <br />
-                <label htmlFor="fecha">Seleccionar Fecha:</label>
-                <input type="date" name="fecha" value={form.fecha} onChange={changeFecha}></input>
-                <br />
+                <div>
+                    <label>Ciudad de Partida:</label>
+                    <select onChange={changeCiudadPartida}>
+                        <option defaultValue="">Seleccionar Ciudad</option>
+                        if(datosCiudades == null){
+                            <option>No Hay Datos</option>
+                        }else{
+                            datosCiudades.map((c) => {
+                                return (<option key={c.id} value={c.nombre}>{c.nombre + ' ' + c.localidad}</option>)
+                            })
+                        }
+                    </select>
+                    <label>Ciudad de Destino:</label>
+                    <select onChange={changeCiudadDestino}>
+                        <option defaultValue="">Seleccionar Ciudad</option>
+                        if(datosCiudades == null){
+                            <option>No Hay Datos</option>
+                        }else{
+                            datosCiudades.map((c) => {
+                                return (<option key={c.id} value={c.nombre}>{c.nombre + ' ' + c.localidad}</option>)
+                            })
+                        }
+                    </select>
+                </div>
+                <div>
+                    <label>Empresa de Viaje:</label>
+                    <select onChange={changeEmpresa}>
+                        <option defaultValue="">Seleccionar</option>
+                        if(allEmpresas == null){
+                            <option>No Hay Datos</option>
+                        }else{allEmpresas.map((e) => {
+                            return (<option key={e.id} value={e.nombre}>{e.nombre}</option>)
+                        })}
+                    </select>
+                    <label htmlFor="fecha">Seleccionar Fecha:</label>
+                    <input type="date" name="fecha" value={form.fecha} onChange={changeFecha}></input>
+                </div>
                 <label>Datos Personales</label>
-                <br />
-                <label htmlFor="nombre">Nombre:</label>
-                <input type="text" name="nombre" value={form.pasajero.nombre} onChange={changeNom}></input>
-                <label htmlFor="apellido">Apellido:</label>
-                <input type="text" name="apellido" value={form.pasajero.apellido} onChange={changeApe}></input>
-                <label htmlFor="dni">Documento:</label>
-                <input type="number" name="dni" value={form.pasajero.dni} onChange={changeDni}></input>
-                <br />
-                <label>Seleccionar cantidad de Pasajes</label>
-                <select onChange={changeCantPasajes}>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-                <button type="submit">Siguente</button>
+                <div>
+                    <label htmlFor="nombre">Nombre:</label>
+                    <input type="text" name="nombre" value={form.pasajero.nombre} onChange={changeNom}></input>
+                    <label htmlFor="apellido">Apellido:</label>
+                    <input type="text" name="apellido" value={form.pasajero.apellido} onChange={changeApe}></input>
+                    <label htmlFor="dni">Documento:</label>
+                    <input type="number" name="dni" value={form.pasajero.dni} onChange={changeDni}></input>
+                </div>
+                <div>
+                    <label>Seleccionar cantidad de Pasajes</label>
+                    <select onChange={changeCantPasajes}>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <button type="submit" className="btnSiguiente" onClick={changeEnviado}>Siguiente</button>
             </form>
         </>
     )
