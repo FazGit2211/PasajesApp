@@ -6,6 +6,7 @@ import "./formulaarioStyle.css";
 //tipo dato formulario
 interface formData {
     empresa: {
+        id:number
         nombre: string
     }, destino: {
         ciudadPartida: string,
@@ -25,6 +26,7 @@ interface formProps {
 export default function ComprarForm({ response}: formProps) {
     const [form, setform] = useState<formData>({
         empresa: {
+            id:0,
             nombre: "",
         }, destino: {
             ciudadPartida: "",
@@ -38,7 +40,7 @@ export default function ComprarForm({ response}: formProps) {
     });
 
     const { datosCiudades } = useCiudades();
-    const { allEmpresas } = useEmpresas();
+    const { allEmpresas } = useEmpresas(form);
     //Funciones handle input form
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -161,7 +163,7 @@ export default function ComprarForm({ response}: formProps) {
                         if(allEmpresas == null){
                             <option>No Hay Datos</option>
                         }else{allEmpresas.map((e) => {
-                            return (<option key={e.id} value={e.nombre}>{e.nombre}</option>)
+                            return (<option key={e.empresa.id} value={e.empresa.nombre}>{e.empresa.nombre}</option>)
                         })}
                     </select>
                     <label htmlFor="fecha">Seleccionar Fecha:</label>

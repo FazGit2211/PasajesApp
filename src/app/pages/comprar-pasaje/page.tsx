@@ -4,6 +4,7 @@ import Formulario from "../../components/forms/comprar-form/ComprarForm";
 import Butaca from "@/app/components/card/cardButacas/Butaca";
 interface formularioPasaje {
     empresa: {
+        id:number
         nombre: string
     }, destino: {
         ciudadPartida: string,
@@ -15,7 +16,7 @@ interface formularioPasaje {
     }, fecha: string, cantPasajes: string, enviado: boolean
 }
 
-export default function () {
+export default function ({empresa,destino,pasajero,fecha,cantPasajes,enviado}:formularioPasaje) {
     const [formData, setFormData] = useState<formularioPasaje>();
     const handleResponse = (data: formularioPasaje) => {
         setFormData(data);
@@ -23,7 +24,7 @@ export default function () {
     }
 
     if (formData?.enviado) {
-        return <Butaca empresa={formData.empresa} cantPasajes={formData.cantPasajes}/>
+        return <Butaca empresa={empresa} destino={destino} pasajero={pasajero} fecha={fecha} cantPasajes={cantPasajes} enviado/>
     }
     return (
         <>
