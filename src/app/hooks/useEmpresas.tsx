@@ -1,12 +1,22 @@
 import { useEffect, useState } from "react";
 //tipo de dato 
-interface empresa {
-    id: number,
-    nombre: string
+interface formularioPasaje {
+    empresa: {
+        id:number
+        nombre: string
+    }, destino: {
+        ciudadPartida: string,
+        ciudadDestino: string
+    }, pasajero: {
+        nombre: string,
+        apellido: string,
+        dni: string
+    }, fecha: string, cantPasajes: string, enviado: boolean
 }
-export const useEmpresas = () => {
-    const [allEmpresas, setDatosEmpresa] = useState<empresa[]>([]);
-    const [findByIdEmpresa, setFindByIdEmpresa] = useState([]);
+
+export const useEmpresas = ({empresa,destino,pasajero,fecha,cantPasajes,enviado}: formularioPasaje) => {
+    const [allEmpresas, setDatosEmpresa] = useState<formularioPasaje[]>([]);
+    const [findByIdEmpresa, setFindByIdEmpresa] = useState<formularioPasaje[]>([]);
     const urlPrincipal = 'http://localhost:8080/admin/';
 
 
@@ -21,7 +31,7 @@ export const useEmpresas = () => {
 
 
     useEffect(() => {
-        fetch(urlPrincipal + "empresa" + "/")
+        fetch(urlPrincipal + "empresa" + "/" + empresa.nombre)
             .then(response => response.json())
             .then(data => setFindByIdEmpresa(data))
             .catch(error => console.error(error))
