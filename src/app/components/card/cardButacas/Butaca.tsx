@@ -14,7 +14,7 @@ interface formularioPasaje {
         dni: string
     }, fecha: string, cantPasajes: string, enviado: boolean
 }
-export default function Butaca({empresa,destino,pasajero,fecha,cantPasajes,enviado} : formularioPasaje) {
+export default function Butaca({empresa={id:0,nombre:"NN"},destino={ciudadPartida:"NN",ciudadDestino:"NN"},pasajero={nombre:"Desconocido",apellido:"Desconocido",dni:"00000000"},fecha="14/11/24",cantPasajes="NN",enviado=false} : formularioPasaje) {
     const { findByIdEmpresa } = useEmpresas({empresa,destino,pasajero,fecha,cantPasajes,enviado})
     return (
         <>
