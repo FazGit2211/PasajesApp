@@ -49,38 +49,32 @@ nav {
 
 .itemLogo {
   display: flex;
-  flex-grow: 0;
-  flex-shrink: 1;
-  flex-basis: auto;
 }
 
 .itemUl {
   display: flex;
-  justify-content: space-evenly;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
 }
 
 li {
   list-style: none;
+  margin: 1rem;
 }
 
 a {
   text-decoration: none;
 }
 
-.div-home {
+main {
   flex-grow: 1;
 }
 
 footer {
-  display: inline-flex;
+  display: flex;
   width: 100%;
-  justify-content: space-evenly;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .list-inline{
-  
+  display: flex;
 }

@@ -25,5 +25,4 @@ const CardOferts = () => {
         </>
     )
 }
-
 export default CardOferts;
