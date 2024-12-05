@@ -1,4 +1,4 @@
-const CardOferts = () => {
+const CardOferts = ({data}) => {
     return (
         <>
             <div className="py-1">
@@ -9,8 +9,12 @@ const CardOferts = () => {
                                 <div className="card-body p-4">
                                     <div className="text-center">
                                         <h5 className="fw-bolder">Empresa:</h5>
-                                        <ul>
-                                            <li>Empresa Data</li>
+                                        <ul>                                           
+                                            <li>Número de Oferta :{data.numero}</li>
+                                            <li>Forma de Pago :{data.formaPago}</li>
+                                            <li>Valor del Pasaje :{data.valor}$</li>
+                                            <li>Fecha de Vigencia :{data.fechaVigencia}</li>
+                                            <li>Fecha de Caducidad :{data.fechaCaducidad}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -25,5 +29,4 @@ const CardOferts = () => {
         </>
     )
 }
-
 export default CardOferts;
