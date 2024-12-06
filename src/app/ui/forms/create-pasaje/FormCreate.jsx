@@ -1,16 +1,18 @@
 'use client';
 import { useState } from "react";
-const FormCreate = ({ofertData}) => {
+const FormCreate = ({offerData}) => {
 
     const [form, setForm] = useState({
-        numero: ofertData.numero,
-        formaPago: ofertData.formaPago,
-        valor: ofertData.valor,
-        destino: {
-            salida: "",
-            llegada: "",
+        number: offerData.number,
+        paymentMethod: offerData.paymentMethod,
+        value: offerData.value,
+        destiny: {
+            exit: "",
+            arrival: "",
         }
     });
+    //Obtener empresas
+    const dataCitys = fetchAllCitys();
 
     //Funciones handle input form
     const handleSubmit = (e) => {
@@ -18,19 +20,19 @@ const FormCreate = ({ofertData}) => {
         response(form);
     }
 
-    const changeDestinoSalida = (e) => {
+    const changeDestinyExit = (e) => {
         setForm({
-            ...form, destino: {
-                ...form.destino,
-                salida: e.target.value
+            ...form, destiny: {
+                ...form.destiny,
+                exit: e.target.value
             }
         })
     };
-    const changeDestinoLlegada = (e) => {
+    const changeDestinyArrival = (e) => {
         setForm({
-            ...form, destino: {
-                ...form.destino,
-                llegada: e.target.value
+            ...form, destiny: {
+                ...form.destiny,
+                arrival: e.target.value
             }
         })
     };
@@ -39,31 +41,31 @@ const FormCreate = ({ofertData}) => {
         <>
             <form method="POST" action="" onSubmit={handleSubmit}>
                 <div>
-                    <label>Número de Oferta:{form.numero}</label>
-                    <label>Forma de Pago:{form.formaPago}</label>
-                    <label>Valor del Pasaje:{form.valor}</label>
+                    <label>Número de Oferta:{form.number}</label>
+                    <label>Forma de Pago:{form.paymentMethod}</label>
+                    <label>Valor del Pasaje:{form.value}</label>
                     <label>Ciudad de Partida:</label>
-                    <select onChange={changeDestinoSalida}>
+                    <select onChange={changeDestinyExit}>
                         <option defaultValue="">Seleccionar Ciudad</option>
                         if(datosCiudades == null){
                             <option>No Hay Datos</option>
                         }else{
-                            /*
-                            datosCiudades.map((c) => {
+                            
+                            dataCitys.map((c) => {
                                 return (<option key={c.id} value={c.nombre}>{c.nombre + ' ' + c.localidad}</option>)
-                            })*/
+                            })
                         }
                     </select>
                     <label>Ciudad de Destino:</label>
-                    <select onChange={changeDestinoLlegada}>
+                    <select onChange={changeDestinyArrival}>
                         <option defaultValue="">Seleccionar Ciudad</option>
                         if(datosCiudades == null){
                             <option>No Hay Datos</option>
                         }else{
-                            /*
-                            datosCiudades.map((c) => {
+                            
+                            dataCitys.map((c) => {
                                 return (<option key={c.id} value={c.nombre}>{c.nombre + ' ' + c.localidad}</option>)
-                            })*/
+                            })
                         }
                     </select>
                 </div>

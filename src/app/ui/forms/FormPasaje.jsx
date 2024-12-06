@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react";
 
-const FormPasaje = () => {
+const FormPassage = () => {
     const [form, setForm] = useState({
         empresa: {
             nombre: ""
@@ -170,4 +170,4 @@ const FormPasaje = () => {
     )
 }
 
-export default FormPasaje;
+export default FormPassage;
