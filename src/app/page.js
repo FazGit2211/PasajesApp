@@ -2,8 +2,8 @@ import { fetchEmpresas } from "./lib/api";
 import CardOferts from "./ui/cards/cardOferts";
 
 export default async function Home() {
+  //obtener del servidor los datos
   const empresasData = await fetchEmpresas();
-  console.log(empresasData);
   return (
     <>
       <main>

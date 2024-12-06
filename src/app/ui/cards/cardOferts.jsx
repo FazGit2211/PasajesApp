@@ -1,4 +1,17 @@
+'use client'
+import { useState } from "react";
+import FormCreate from "../forms/create-pasaje/FormCreate";
+
 const CardOferts = ({data}) => {
+    const[clickAction, setClickAction] = useState(false);
+
+    const handleClick = () => {
+        setClickAction(true);
+    }
+
+    if(clickAction){
+        return <FormCreate ofertData={data}/>
+    }
     return (
         <>
             <div className="py-1">
@@ -19,7 +32,7 @@ const CardOferts = ({data}) => {
                                     </div>
                                 </div>
                                 <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div className="text-center"><a className="btn btn-outline-dark mt-auto" href="#">Comprar</a></div>
+                                    <div className="text-center"><button onClick={handleClick}>Comprar</button></div>
                                 </div>
                             </div>
                         </div>

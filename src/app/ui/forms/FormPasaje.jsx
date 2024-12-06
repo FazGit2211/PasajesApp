@@ -1,11 +1,10 @@
-'use client';
+'use client'
 import { useState } from "react";
-export default FormBuy = () => {
 
-    const [form, setform] = useState({
+const FormPasaje = () => {
+    const [form, setForm] = useState({
         empresa: {
-            id: 0,
-            nombre: "",
+            nombre: ""
         }, destino: {
             ciudadPartida: "",
             ciudadDestino: "",
@@ -16,7 +15,6 @@ export default FormBuy = () => {
         }, fecha: "",
         cantPasajes: "", enviado: false
     });
-
     //Funciones handle input form
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,7 +22,7 @@ export default FormBuy = () => {
     }
 
     const changeEmpresa = (e) => {
-        setform(
+        setForm(
             {
                 ...form,
                 empresa: {
@@ -171,3 +169,5 @@ export default FormBuy = () => {
         </>
     )
 }
+
+export default FormPasaje;
