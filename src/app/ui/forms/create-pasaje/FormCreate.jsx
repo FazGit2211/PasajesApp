@@ -1,20 +1,14 @@
 'use client';
 import { useState } from "react";
-export default FormCreate = () => {
+const FormCreate = ({ofertData}) => {
 
     const [form, setForm] = useState({
-        numero: "",
-        formaPago: "",
-        valor: 0,
+        numero: ofertData.numero,
+        formaPago: ofertData.formaPago,
+        valor: ofertData.valor,
         destino: {
             salida: "",
             llegada: "",
-            ciudad: {
-                nombre: "",
-                provincia: "",
-                localidad: "",
-                distancia: 0
-            }
         }
     });
 
@@ -24,9 +18,6 @@ export default FormCreate = () => {
         response(form);
     }
 
-    const changeNumero = (e) => { setForm({ ...form, numero: e.target.value }) };
-    const changeFormaPago = (e) => { setForm({ ...form, formaPago: e.target.value }) };
-    const changeValor = (e) => { setForm({ ...form, valor: e.target.value }) };
     const changeDestinoSalida = (e) => {
         setForm({
             ...form, destino: {
@@ -43,58 +34,14 @@ export default FormCreate = () => {
             }
         })
     };
-    const changeDestinoCiudadNombre = (e) => {
-        setForm({
-            ...form, destino: {
-                ...form.destino,
-                ciudad: {
-                    ...form.destino.ciudad,
-                    nombre: e.target.value
-                }
-            }
-        })
-    };
-
-    const changeDestinoCiudadProvincia = (e) => {
-        setForm({
-            ...form, destino: {
-                ...form.destino,
-                ciudad: {
-                    ...form.destino.ciudad,
-                    provincia: e.target.value
-                }
-            }
-        })
-    };
-
-    const changeDestinoCiudadLocalidad = (e) => {
-        setForm({
-            ...form, destino: {
-                ...form.destino,
-                ciudad: {
-                    ...form.destino.ciudad,
-                    localidad: e.target.value
-                }
-            }
-        })
-    };
-
-    const changeDestinoCiudadDistancia = (e) => {
-        setForm({
-            ...form, destino: {
-                ...form.destino,
-                ciudad: {
-                    ...form.destino.ciudad,
-                    distancia: e.target.value
-                }
-            }
-        })
-    };
 
     return (
         <>
             <form method="POST" action="" onSubmit={handleSubmit}>
                 <div>
+                    <label>Número de Oferta:{form.numero}</label>
+                    <label>Forma de Pago:{form.formaPago}</label>
+                    <label>Valor del Pasaje:{form.valor}</label>
                     <label>Ciudad de Partida:</label>
                     <select onChange={changeDestinoSalida}>
                         <option defaultValue="">Seleccionar Ciudad</option>
@@ -120,16 +67,10 @@ export default FormCreate = () => {
                         }
                     </select>
                 </div>
-                <div>
-                    <label>Tipo de Forma de Pago</label>
-                    <select onChange={changeFormaPago}>
-                        <option defaultValue="">Seleccionar Forma de Pago</option>
-                        <option>Débito</option>
-                        <option>Crédito</option>
-                    </select>
-                </div>
-                <button type="submit" className="btnSiguiente" onClick={changeEnviado}>Siguiente</button>
+                <button type="submit" className="btnSiguiente">Siguiente</button>
             </form>
         </>
     )
 }
+
+export default FormCreate;

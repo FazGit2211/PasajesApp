@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const NavComponent = () => {
     return (
         <>
@@ -7,7 +9,7 @@ const NavComponent = () => {
                     <li><a href="#">Inicio</a></li>
                     <li><a href="#">Iniciar Sesión</a></li>
                     <li><a href="#">Registrarce</a></li>
-                    <li><a href="#">Contacto</a></li>
+                    <li><Link href="/pages/pasaje-reserv">Reservar</Link></li>
                 </ul>
             </nav>
         </>
