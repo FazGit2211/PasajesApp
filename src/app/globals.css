@@ -79,6 +79,8 @@ footer {
   display: flex;
 }
 
-.card-oferts{
+.card-offer{
+  border: 1px;
   border-style: solid;
+  border-radius: 1rem;
 }

@@ -19,11 +19,11 @@ const CardOffer = ({ data }) => {
                     <div>
                         <h5 >Empresa:</h5>
                         <ul>
-                            <li>Número de Oferta :{data.number}</li>
-                            <li>Forma de Pago :{data.paymentMethod}</li>
-                            <li>Valor del Pasaje :{data.value}$</li>
-                            <li>Fecha de Vigencia :{data.effectiveDate}</li>
-                            <li>Fecha de Caducidad :{data.expirationDate}</li>
+                            <li>Número de Oferta :{data.numero}</li>
+                            <li>Forma de Pago :{data.formaPago}</li>
+                            <li>Valor del Pasaje :{data.valor}$</li>
+                            <li>Fecha de Vigencia :{data.fechaVigencia}</li>
+                            <li>Fecha de Caducidad :{data.fechaCaducidad}</li>
                         </ul>
                     </div>
                 </div>

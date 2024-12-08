@@ -1,75 +1,96 @@
 'use client';
-import { useState } from "react";
-const FormCreate = ({offerData}) => {
+import { useEffect, useState } from "react";
+import FormPersonalData from "./FormPersonalData";
+const FormCreate = ({ offerData }) => {
 
-    const [form, setForm] = useState({
-        number: offerData.number,
-        paymentMethod: offerData.paymentMethod,
-        value: offerData.value,
+    const [formValue, setForm] = useState({
+        number: offerData.numero,
+        paymentMethod: offerData.formaPago,
+        value: offerData.valor,
         destiny: {
             exit: "",
             arrival: "",
-        }
+        },
+        dateExit: ""
     });
+    const [nextForm, setNextForm] = useState(false);
     //Obtener empresas
-    const dataCitys = fetchAllCitys();
+    const [citys, setCitys] = useState([]);
+    const urlPrincipal = 'http://localhost:8080/admin/';
+    useEffect(() => {
+        fetch(urlPrincipal + "city").then(response => response.json()).then(data => setCitys(data)).then(error => console.log(error))
+    }, []);
 
     //Funciones handle input form
     const handleSubmit = (e) => {
         e.preventDefault();
-        response(form);
-    }
+        response(formValue);
+    };
 
     const changeDestinyExit = (e) => {
         setForm({
-            ...form, destiny: {
-                ...form.destiny,
+            ...formValue, destiny: {
+                ...formValue.destiny,
                 exit: e.target.value
             }
         })
     };
     const changeDestinyArrival = (e) => {
         setForm({
-            ...form, destiny: {
-                ...form.destiny,
+            ...formValue, destiny: {
+                ...formValue.destiny,
                 arrival: e.target.value
             }
         })
     };
 
+    const changeDateExit = (e) => {
+        setForm({
+            ...formValue, dateExit: e.target.value
+        })
+    };
+
+    const handleClickNext = () => {
+        setNextForm(true);
+    };
+
+    if (nextForm) {
+        return <FormPersonalData formData={formValue}/>
+    }
+
     return (
         <>
             <form method="POST" action="" onSubmit={handleSubmit}>
                 <div>
-                    <label>Número de Oferta:{form.number}</label>
-                    <label>Forma de Pago:{form.paymentMethod}</label>
-                    <label>Valor del Pasaje:{form.value}</label>
-                    <label>Ciudad de Partida:</label>
-                    <select onChange={changeDestinyExit}>
-                        <option defaultValue="">Seleccionar Ciudad</option>
-                        if(datosCiudades == null){
-                            <option>No Hay Datos</option>
-                        }else{
-                            
-                            dataCitys.map((c) => {
-                                return (<option key={c.id} value={c.nombre}>{c.nombre + ' ' + c.localidad}</option>)
-                            })
-                        }
-                    </select>
+                    <div>
+                        <label>Número de Oferta:{formValue.number}</label>
+                        <label>Forma de Pago:{formValue.paymentMethod}</label>
+                        <label>Valor del Pasaje:{formValue.value}</label>
+                    </div>
+                    <div>
+                        <label>Ciudad de Partida:</label>
+                        <select onChange={changeDestinyExit}>
+                            <option defaultValue="">Seleccionar Ciudad</option>
+                            {
+                                citys.map((elem) => {
+                                    return <option key={elem.id}>{elem.nombre + " " + elem.provincia}</option>
+                                })
+                            }
+                        </select>
+                        <label>Fecha de Salida</label>
+                        <input type="date" onChange={changeDateExit}></input>
+                    </div>
                     <label>Ciudad de Destino:</label>
                     <select onChange={changeDestinyArrival}>
                         <option defaultValue="">Seleccionar Ciudad</option>
-                        if(datosCiudades == null){
-                            <option>No Hay Datos</option>
-                        }else{
-                            
-                            dataCitys.map((c) => {
-                                return (<option key={c.id} value={c.nombre}>{c.nombre + ' ' + c.localidad}</option>)
+                        {
+                            citys.map((elem) => {
+                                return <option key={elem.id}>{elem.nombre + " " + elem.provincia}</option>
                             })
                         }
                     </select>
                 </div>
-                <button type="submit" className="btnSiguiente">Siguiente</button>
+                <button type="submit" onClick={handleClickNext}>Siguiente</button>
             </form>
         </>
     )

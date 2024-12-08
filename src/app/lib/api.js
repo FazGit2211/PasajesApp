@@ -1,30 +1,15 @@
 const urlPrincipal = 'http://localhost:8080/admin/';
-export async function fetchAllEnterprises() {
+
+const fetchAllEnterprises = async () => {
     try {
         const response = await fetch(urlPrincipal + "enterprise");
         const data = await response.json();
-        const dataArray = [];
-        Object.entries(data).forEach((elem) => {
-            dataArray.push(data[elem]);
-        })
-        return dataArray;
+        console.log(data);
+        return data;
     } catch (error) {
         console.error(error);
         return [];
     }
 }
 
-export async function fetchAllCitys() {
-    try {
-        const response = await fetch(urlPrincipal + "city");
-        const data = await response.json();
-        const dataArray = [];
-        Object.entries(data).forEach((elem) => {
-            dataArray.push(data[elem]);
-        })
-        return dataArray;
-    } catch (error) {
-        console.error(error);
-        return [];
-    }
-}
+export { fetchAllEnterprises }
