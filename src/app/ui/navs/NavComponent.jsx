@@ -9,7 +9,7 @@ const NavComponent = () => {
                     <li><a href="#">Inicio</a></li>
                     <li><a href="#">Iniciar Sesión</a></li>
                     <li><a href="#">Registrarce</a></li>
-                    <li><Link href="/pages/pasaje-reserv">Reservar</Link></li>
+                    <li><Link href="/pages/passage-reservation">Reservar</Link></li>
                 </ul>
             </nav>
         </>

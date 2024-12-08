@@ -1,18 +1,17 @@
-import { fetchEmpresas } from "./lib/api";
-import CardOferts from "./ui/cards/cardOferts";
+import { fetchAllEnterprises} from "./lib/api";
+import CardOffer from "./ui/cards/cardOffer";
 
 export default async function Home() {
-  //obtener del servidor los datos
-  const empresasData = await fetchEmpresas();
+  //obtener todas las empresas
+  const enterpriseData = await fetchAllEnterprises();
   return (
     <>
       <main>
         <h3>Ofertas de pasajes disponibles por tiempo limitado!</h3>
         <ul>
-          {empresasData.map(el => {
-            console.log("Pasajes encontrados"+el.pasajes);
+          {enterpriseData.map(el => {
             return el.pasajes.map( e => {
-              return <li><CardOferts data={e}/></li>
+              return <li><CardOffer data={e}/></li>
             })
           })
         }
