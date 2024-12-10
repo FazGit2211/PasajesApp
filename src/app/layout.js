@@ -1,6 +1,6 @@
-import "./globals.css";
 import NavComponent from "./ui/navs/NavComponent";
 import FooterComponent from "./ui/footers/FooterComponent";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const metadata = {
   title: "Create Next App",
@@ -10,10 +10,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <NavComponent/>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
+      <body className="d-flex flex-column min-vh-100">
+        <NavComponent />
         {children}
-        <FooterComponent/>
+        <FooterComponent />
       </body>
     </html>
   );

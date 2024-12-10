@@ -6,7 +6,7 @@ export default async function Home() {
   const enterpriseData = await fetchAllEnterprises();
   return (
     <>
-      <main>
+      <main className="container">
         <h3>Ofertas de pasajes disponibles por tiempo limitado!</h3>
         <ul>
           {enterpriseData.map(el => {
@@ -15,6 +15,7 @@ export default async function Home() {
             })
           })
         }
+        <CardOffer data={enterpriseData}/>
         </ul>
       </main>
     </>
