@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from "react";
 import FormPersonalData from "./FormPersonalData";
+import Link from "next/link";
 const FormCreate = ({ offerData }) => {
 
     const [formValue, setForm] = useState({
@@ -55,21 +56,21 @@ const FormCreate = ({ offerData }) => {
     };
 
     if (nextForm) {
-        return <FormPersonalData formData={formValue}/>
+        return <FormPersonalData formData={formValue} />
     }
 
     return (
         <>
             <form method="POST" action="" onSubmit={handleSubmit}>
-                <div>
-                    <div>
-                        <label>Número de Oferta:{formValue.number}</label>
-                        <label>Forma de Pago:{formValue.paymentMethod}</label>
-                        <label>Valor del Pasaje:{formValue.value}</label>
+                <div className="container">
+                    <div className="row">
+                        <label className="form-label">Número de Oferta:{formValue.number}</label>
+                        <label className="form-label">Forma de Pago:{formValue.paymentMethod}</label>
+                        <label className="form-label">Valor del Pasaje:{formValue.value}</label>
                     </div>
                     <div>
-                        <label>Ciudad de Partida:</label>
-                        <select onChange={changeDestinyExit}>
+                        <label className="form-label">Ciudad de Partida:</label>
+                        <select onChange={changeDestinyExit} className="form-select">
                             <option defaultValue="">Seleccionar Ciudad</option>
                             {
                                 citys.map((elem) => {
@@ -77,11 +78,11 @@ const FormCreate = ({ offerData }) => {
                                 })
                             }
                         </select>
-                        <label>Fecha de Salida</label>
-                        <input type="date" onChange={changeDateExit}></input>
+                        <label className="form-label">Fecha de Salida</label>
+                        <input type="date" onChange={changeDateExit} className="form-control"></input>
                     </div>
-                    <label>Ciudad de Destino:</label>
-                    <select onChange={changeDestinyArrival}>
+                    <label className="form-label">Ciudad de Destino:</label>
+                    <select onChange={changeDestinyArrival} className="form-select">
                         <option defaultValue="">Seleccionar Ciudad</option>
                         {
                             citys.map((elem) => {
@@ -89,8 +90,9 @@ const FormCreate = ({ offerData }) => {
                             })
                         }
                     </select>
+                    <button type="submit" onClick={handleClickNext} className="btn btn-primary">Siguiente</button>
+                    <button className="btn btn-secondary"><Link href="/">Atrás</Link></button>
                 </div>
-                <button type="submit" onClick={handleClickNext}>Siguiente</button>
             </form>
         </>
     )

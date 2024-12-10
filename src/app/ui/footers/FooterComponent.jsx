@@ -1,7 +1,7 @@
 const FooterContact = () => {
     return (
         <>
-            <footer>
+            <footer className="bg-dark text-white text-center py-3 mt-auto">
                 <ul className="list-inline">
                     <li className="list-inline-item"><a href="#!">About</a></li>
                     <li className="list-inline-item">⋅</li>
