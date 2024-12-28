@@ -1,19 +1,16 @@
 'use client'
 import { useState } from "react";
-import FormCreate from "../forms/create-pasaje/FormCreate";
 
-const CardOffer = ({ data }) => {
+const CardOffer = ({ data, response }) => {
     const [clickAction, setClickAction] = useState(false);
     const handleClick = () => {
         setClickAction(true);
+        response(data);
     }
 
-    if (clickAction) {
-        return <FormCreate offerData={data} />
-    }
     return (
         <>
-            <div className="card">
+            <div className="card m-1">
                 <div className="card-header">
                     <img src="@/next" alt="logoEmpresa" />
                 </div>
