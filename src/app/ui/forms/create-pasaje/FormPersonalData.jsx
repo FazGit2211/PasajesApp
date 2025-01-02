@@ -1,6 +1,9 @@
 import { useState } from "react";
-
+import { useRouter } from "next/navigation";
 const FormPersonalData = ({ formData }) => {
+
+    const router = useRouter();
+
     const [formValues, setFormValue] = useState({
         ...formData, passenger: {
             name: "",
@@ -11,7 +14,7 @@ const FormPersonalData = ({ formData }) => {
     //Deffined handle function
     const handleSubmit = (e) => {
         e.preventDefault();
-        response(formValues);
+        console.log(formValues);
     }
     const handleChangeName = (e) => {
         setFormValue({
@@ -33,7 +36,7 @@ const FormPersonalData = ({ formData }) => {
         })
     };
 
-    const handleChangeDni = () => {
+    const handleChangeDni = (e) => {
         setFormValue({
             ...formValues,
             passenger: {
@@ -58,7 +61,7 @@ const FormPersonalData = ({ formData }) => {
                     <label className="form-label">Número de Documento:</label>
                     <input type="number" onChange={handleChangeDni} className="form-control"></input>
                 </div>
-                <button type="submit" onClick={handleSubmit} className="btn btn-primary">Siguiente</button>
+                <button type="submit" onClick={handleSubmit} className="btn btn-primary m-1">Siguiente</button>
             </form>
         </>
     )

@@ -25,7 +25,7 @@ const FormCreate = ({ offerData }) => {
     //Funciones handle input form
     const handleSubmit = (e) => {
         e.preventDefault();
-        response(formValue);
+        setNextForm(true);
     };
 
     const changeDestinyExit = (e) => {
@@ -51,11 +51,7 @@ const FormCreate = ({ offerData }) => {
         })
     };
 
-    const handleClickNext = () => {
-        setNextForm(true);
-    };
-
-    if (nextForm) {
+    if(nextForm){
         return <FormPersonalData formData={formValue} />
     }
 
@@ -90,8 +86,8 @@ const FormCreate = ({ offerData }) => {
                             })
                         }
                     </select>
-                    <button type="submit" onClick={handleClickNext} className="btn btn-primary">Siguiente</button>
-                    <button className="btn btn-secondary"><Link href="/">Atrás</Link></button>
+                    <button type="submit" className="btn btn-primary m-1">Siguiente</button>
+                    <button className="btn btn-secondary m-1"><Link href="/Home">Atrás</Link></button>
                 </div>
             </form>
         </>
