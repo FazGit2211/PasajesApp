@@ -7,8 +7,8 @@ export default async function Home() {
   const enterpriseData = await GET();
   return (
     <>
-      <main className="container">
-        <CardsOfferts data={enterpriseData}/>
+      <main className="vh-100">
+        <CardsOfferts data={enterpriseData} />
       </main>
     </>
   );

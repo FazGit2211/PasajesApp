@@ -1,11 +1,14 @@
 'use client'
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+const CardOffer = ({ data }) => {
 
-const CardOffer = ({ data, response }) => {
-    const [clickAction, setClickAction] = useState(false);
+    const router = useRouter();  // Inicializar el hook useRouter
+
     const handleClick = () => {
-        setClickAction(true);
-        response(data);
+        router.push({
+            pathname: "/pages/pasaje-compra",
+            query: { data }
+        });
     }
 
     return (
