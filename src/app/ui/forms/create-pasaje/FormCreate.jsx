@@ -2,12 +2,15 @@
 import { useEffect, useState } from "react";
 import FormPersonalData from "./FormPersonalData";
 import Link from "next/link";
-const FormCreate = ({ offerData }) => {
+import { useData } from "@/app/contexts/DataContext";
+const FormCreate = () => {
 
+    const { data, updateData } = useData();
+    console.log(JSON.stringify(data));
     const [formValue, setForm] = useState({
-        number: offerData.numero,
-        paymentMethod: offerData.formaPago,
-        value: offerData.valor,
+        number: data.numero,
+        paymentMethod: data.formaPago,
+        value: data.valor,
         destiny: {
             exit: "",
             arrival: "",
@@ -26,6 +29,7 @@ const FormCreate = ({ offerData }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setNextForm(true);
+        updateData(formValue);
     };
 
     const changeDestinyExit = (e) => {
@@ -51,8 +55,8 @@ const FormCreate = ({ offerData }) => {
         })
     };
 
-    if(nextForm){
-        return <FormPersonalData formData={formValue} />
+    if (nextForm) {
+        return <FormPersonalData/>
     }
 
     return (

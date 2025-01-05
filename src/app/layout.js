@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavComponent from './ui/navs/NavComponent';
 import FooterContact from './ui/footers/FooterComponent';
+import { DataProvider } from './contexts/DataContext';
 
 export const metadata = {
   title: "Create Next App",
@@ -17,7 +18,11 @@ export default function RootLayout({ children }) {
         <header>
           <NavComponent />
         </header>
-        {children}
+        <DataProvider>
+          <main className='min-vh-100'>
+            {children}
+          </main>
+        </DataProvider>
         <footer>
           <FooterContact />
         </footer>

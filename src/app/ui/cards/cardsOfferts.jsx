@@ -8,7 +8,7 @@ const CardsOfferts = ({ data }) => {
             <h3>Ofertas de pasajes disponibles por tiempo limitado!</h3>
             {data.map(el => {
                 return el.pasajes.map(e => {
-                    return <ul key={e.id}><li><CardOffer data={e} /></li></ul>
+                    return <ul key={e.id}><li><CardOffer dataValues={e} /></li></ul>
                 })
             })
             }
