@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './globals.css';
 import NavComponent from './ui/navs/NavComponent';
 import FooterContact from './ui/footers/FooterComponent';
 import { DataProvider } from './contexts/DataContext';
@@ -14,12 +14,12 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className="d-flex flex-column">
+      <body>
         <header>
           <NavComponent />
         </header>
         <DataProvider>
-          <main className='min-vh-100'>
+          <main>
             {children}
           </main>
         </DataProvider>

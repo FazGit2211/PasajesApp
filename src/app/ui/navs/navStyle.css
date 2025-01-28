@@ -1,0 +1,30 @@
+/* styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.itemA {
+    text-decoration: none;
+    color:  hsl(220, 13%, 20%);
+}
+
+.itemLi {
+    list-style: none;
+    margin: 1rem;
+}
+.navBar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.itemLogo {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.itemList {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
