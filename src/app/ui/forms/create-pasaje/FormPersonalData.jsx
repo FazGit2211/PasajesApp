@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-const FormPersonalData = ({ formData }) => {
+import { useData } from "@/app/contexts/DataContext";
+const FormPersonalData = () => {
 
-    const router = useRouter();
+    const { data, updateData } = useData();
 
     const [formValues, setFormValue] = useState({
-        ...formData, passenger: {
+        ...data, passenger: {
             name: "",
             surname: "",
             dni: 0
@@ -14,6 +14,7 @@ const FormPersonalData = ({ formData }) => {
     //Deffined handle function
     const handleSubmit = (e) => {
         e.preventDefault();
+        updateData(formValues);
         console.log(formValues);
     }
     const handleChangeName = (e) => {
