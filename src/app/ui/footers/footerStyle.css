@@ -3,7 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: hsl(220, 13%, 20%);
+    background-color: #06296b;
 }
 
 .itemListFooter > li {

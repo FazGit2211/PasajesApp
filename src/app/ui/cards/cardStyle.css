@@ -1,0 +1,39 @@
+.cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 3rem;
+    gap: 2rem;
+}
+
+.card {
+    border-style: ridge;
+    border-radius: 5px;
+    flex-basis: 30%;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    background-color: #666;
+}
+
+.list-group-item {
+    list-style: none;
+    color: white;
+    font-size: large;
+}
+
+.card-body>h5 {
+    background-color: #417cea;
+    font-size: large;
+    text-align: center;
+}
+
+.btn {
+    font-size: large;
+    border-radius: 3px;
+    border-style: solid;
+    width: 30%;
+    align-self: center;
+}

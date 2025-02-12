@@ -1,30 +1,21 @@
 'use client';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FormPersonalData from "./FormPersonalData";
 import Link from "next/link";
 import { useData } from "@/app/contexts/DataContext";
-const FormCreate = () => {
+const FormCreate = ({ciudad}) => {
 
     const { data, updateData } = useData();
-    console.log(JSON.stringify(data));
     const [formValue, setForm] = useState({
-        number: data.numero,
-        paymentMethod: data.formaPago,
-        value: data.valor,
         destiny: {
-            exit: "",
-            arrival: "",
+            exit: ""
         },
         dateExit: ""
     });
     const [nextForm, setNextForm] = useState(false);
-    //Obtener empresas
+    //Obtener ciudades
+    console.log(ciudad);
     const [citys, setCitys] = useState([]);
-    const urlPrincipal = 'http://localhost:8080/admin/';
-    useEffect(() => {
-        fetch(urlPrincipal + "city").then(response => response.json()).then(data => setCitys(data)).then(error => console.log(error))
-    }, []);
-
     //Funciones handle input form
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -37,14 +28,6 @@ const FormCreate = () => {
             ...formValue, destiny: {
                 ...formValue.destiny,
                 exit: e.target.value
-            }
-        })
-    };
-    const changeDestinyArrival = (e) => {
-        setForm({
-            ...formValue, destiny: {
-                ...formValue.destiny,
-                arrival: e.target.value
             }
         })
     };
@@ -63,33 +46,19 @@ const FormCreate = () => {
         <>
             <form method="POST" action="" onSubmit={handleSubmit}>
                 <div className="container">
-                    <div className="row">
-                        <label className="form-label">Número de Oferta:{formValue.number}</label>
-                        <label className="form-label">Forma de Pago:{formValue.paymentMethod}</label>
-                        <label className="form-label">Valor del Pasaje:{formValue.value}</label>
-                    </div>
                     <div>
-                        <label className="form-label">Ciudad de Partida:</label>
+                        <label className="form-label">Ciudad Destino:</label>
                         <select onChange={changeDestinyExit} className="form-select">
                             <option defaultValue="">Seleccionar Ciudad</option>
                             {
-                                citys.map((elem) => {
-                                    return <option key={elem.id}>{elem.nombre + " " + elem.provincia}</option>
+                                ciudad.map((elem) => {
+                                    return <option key={elem.nombre}>{elem.nombre + " " + elem.provincia}</option>
                                 })
                             }
                         </select>
                         <label className="form-label">Fecha de Salida</label>
                         <input type="date" onChange={changeDateExit} className="form-control"></input>
                     </div>
-                    <label className="form-label">Ciudad de Destino:</label>
-                    <select onChange={changeDestinyArrival} className="form-select">
-                        <option defaultValue="">Seleccionar Ciudad</option>
-                        {
-                            citys.map((elem) => {
-                                return <option key={elem.id}>{elem.nombre + " " + elem.provincia}</option>
-                            })
-                        }
-                    </select>
                     <button type="submit" className="btn btn-primary m-1">Siguiente</button>
                     <button className="btn btn-secondary m-1"><Link href="/Home">Atrás</Link></button>
                 </div>

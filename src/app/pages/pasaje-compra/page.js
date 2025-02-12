@@ -1,13 +1,16 @@
 'use client'
-import { useData } from "@/app/contexts/DataContext";
+import { getAll } from "@/app/api/ciudadRoute";
 import FormCreate from "@/app/ui/forms/create-pasaje/FormCreate";
-export default function PasajeCompra() {
-    const { data } = useData();
-    console.log(data);
+export default async function PasajeCompra() {
+    //fetch valores
+    const ciudades = await getAll();
+    if (ciudades.length == 0) {
+        return <h3>No Hay Datos</h3>
+    }
+
     return (
-        <>
-            <h2>Página de para comprar el pasaje</h2>
-            <FormCreate />
-        </>
+        <main>
+            <FormCreate ciudad={ciudades} />
+        </main>
     )
 }

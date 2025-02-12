@@ -3,7 +3,7 @@
 
 .itemA {
     text-decoration: none;
-    color:  hsl(220, 13%, 20%);
+    color: white;
 }
 
 .itemLi {
@@ -15,6 +15,7 @@
     flex-wrap: wrap;
     align-items: center;
     font-family: 'Roboto', sans-serif;
+    background-color: #191919;
 }
 
 .itemLogo {
@@ -28,3 +29,12 @@
     justify-content: flex-end;
     flex-grow: 1;
 }
+
+
+@media (max-width: 768px) {
+    .itemList{
+      background-color: #ff6611;
+      display: flex;
+      margin: 1px;
+    }
+  }

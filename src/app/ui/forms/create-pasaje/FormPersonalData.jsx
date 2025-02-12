@@ -8,7 +8,8 @@ const FormPersonalData = () => {
         ...data, passenger: {
             name: "",
             surname: "",
-            dni: 0
+            dni: 0,
+            email: ""
         }
     });
     //Deffined handle function
@@ -46,6 +47,16 @@ const FormPersonalData = () => {
             }
         })
     };
+
+    const handleChangeEmail = (e) => {
+        setFormValue({
+            ...formValues,
+            passenger:{
+                ...formValues.passenger,
+                email: e.target.value
+            }
+        })
+    };
     return (
         <>
             <h4>Datos Personales:</h4>
@@ -61,6 +72,10 @@ const FormPersonalData = () => {
                 <div>
                     <label className="form-label">Número de Documento:</label>
                     <input type="number" onChange={handleChangeDni} className="form-control"></input>
+                </div>
+                <div>
+                    <label>Email:</label>
+                    <input type="email" onChange={handleChangeEmail}></input>
                 </div>
                 <button type="submit" onClick={handleSubmit} className="btn btn-primary m-1">Siguiente</button>
             </form>
