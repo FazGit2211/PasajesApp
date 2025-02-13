@@ -3,7 +3,8 @@ import { useState } from "react";
 import FormPersonalData from "./FormPersonalData";
 import Link from "next/link";
 import { useData } from "@/app/contexts/DataContext";
-const FormCreate = ({ciudad}) => {
+import "./formStyle.css";
+const FormCreate = () => {
 
     const { data, updateData } = useData();
     const [formValue, setForm] = useState({
@@ -13,9 +14,6 @@ const FormCreate = ({ciudad}) => {
         dateExit: ""
     });
     const [nextForm, setNextForm] = useState(false);
-    //Obtener ciudades
-    console.log(ciudad);
-    const [citys, setCitys] = useState([]);
     //Funciones handle input form
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -39,7 +37,7 @@ const FormCreate = ({ciudad}) => {
     };
 
     if (nextForm) {
-        return <FormPersonalData/>
+        return <FormPersonalData />
     }
 
     return (
@@ -48,19 +46,18 @@ const FormCreate = ({ciudad}) => {
                 <div className="container">
                     <div>
                         <label className="form-label">Ciudad Destino:</label>
-                        <select onChange={changeDestinyExit} className="form-select">
-                            <option defaultValue="">Seleccionar Ciudad</option>
-                            {
-                                ciudad.map((elem) => {
-                                    return <option key={elem.nombre}>{elem.nombre + " " + elem.provincia}</option>
-                                })
-                            }
+                        <select onChange={changeDestinyExit}>
+                            <option defaultValue="">{data.nombre}</option>
                         </select>
-                        <label className="form-label">Fecha de Salida</label>
-                        <input type="date" onChange={changeDateExit} className="form-control"></input>
                     </div>
-                    <button type="submit" className="btn btn-primary m-1">Siguiente</button>
-                    <button className="btn btn-secondary m-1"><Link href="/Home">Atrás</Link></button>
+                    <div>
+                        <label className="form-label">Fecha de Salida</label>
+                        <input type="date" onChange={changeDateExit} ></input>
+                    </div>
+                    <div>
+                        <button type="submit">Siguiente</button>
+                        <button className="btn-back"><Link href="/Home" className="btn-back-link">Atrás</Link></button>
+                    </div>
                 </div>
             </form>
         </>

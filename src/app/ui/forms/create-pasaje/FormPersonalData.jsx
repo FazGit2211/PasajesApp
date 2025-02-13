@@ -51,7 +51,7 @@ const FormPersonalData = () => {
     const handleChangeEmail = (e) => {
         setFormValue({
             ...formValues,
-            passenger:{
+            passenger: {
                 ...formValues.passenger,
                 email: e.target.value
             }
@@ -59,25 +59,26 @@ const FormPersonalData = () => {
     };
     return (
         <>
-            <h4>Datos Personales:</h4>
             <form method="POST" action="" onSubmit={handleSubmit}>
-                <div>
-                    <label className="form-label">Nombre:</label>
-                    <input type="text" onChange={handleChangeName} className="form-control"></input>
+                <div className="container">
+                    <div>
+                        <label className="form-label">Nombre:</label>
+                        <input type="text" onChange={handleChangeName} ></input>
+                    </div>
+                    <div>
+                        <label className="form-label">Apellido:</label>
+                        <input type="text" onChange={handleChangeSurname} ></input>
+                    </div>
+                    <div>
+                        <label className="form-label">Nº Documento:</label>
+                        <input type="number" onChange={handleChangeDni} ></input>
+                    </div>
+                    <div>
+                        <label className="form-label">Email:</label>
+                        <input type="email" onChange={handleChangeEmail}></input>
+                    </div>
+                    <button type="submit" onClick={handleSubmit}>Siguiente</button>
                 </div>
-                <div>
-                    <label className="form-label">Apellido:</label>
-                    <input type="text" onChange={handleChangeSurname} className="form-control"></input>
-                </div>
-                <div>
-                    <label className="form-label">Número de Documento:</label>
-                    <input type="number" onChange={handleChangeDni} className="form-control"></input>
-                </div>
-                <div>
-                    <label>Email:</label>
-                    <input type="email" onChange={handleChangeEmail}></input>
-                </div>
-                <button type="submit" onClick={handleSubmit} className="btn btn-primary m-1">Siguiente</button>
             </form>
         </>
     )

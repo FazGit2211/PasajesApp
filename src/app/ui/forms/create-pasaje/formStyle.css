@@ -1,0 +1,47 @@
+form {
+    min-height: 60vh;
+    min-width: 30vb;
+    margin: 2rem;
+}
+
+
+button {
+    font-size: large;
+    border-radius: 3px;
+    border-style: solid;
+    color: white;
+    background-color: #417cea;
+    margin: 1rem;
+}
+
+select {
+    border-radius: 4px;
+    background-color: #f1f1f1;
+}
+
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+div {
+    margin: 3rem;
+}
+.form-label {
+    color: white;
+    font-size: medium;
+    margin: 1rem;
+    display: inline-block;
+    width: 100px;
+}
+
+.btn-back {
+    background-color: #191919;
+}
+
+.btn-back-link {
+    color: white;
+    text-decoration: none;
+}
