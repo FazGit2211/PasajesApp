@@ -1,7 +1,9 @@
 'use client'
-import { useData } from "@/app/contexts/DataContext";
-import { useRouter } from "next/navigation";
 import "./cardStyle.css";
+import { useRouter } from "next/navigation";
+import { useData } from "@/app/contexts/DataContext";
+import { Button } from "@mui/material";
+import { Card, CardActions, CardContent, CardHeader, Typography } from "@mui/material";
 const CardElement = ({ dataValues }) => {
     const { updateData } = useData();
     const router = useRouter();
@@ -10,19 +12,20 @@ const CardElement = ({ dataValues }) => {
         router.push("/pages/pasaje-compra");
     }
     return (
-        <>
-            <div className="card">
-                <div className="card-body">
-                    <h5 >DESTINO:</h5>
-                    <ul className="list-group">
-                        <li className="list-group-item">Ciudad :{dataValues.nombre}</li>
-                        <li className="list-group-item">Provincia :{dataValues.provincia}</li>
-                        <li className="list-group-item">Distancia :{dataValues.distancia}</li>
-                    </ul>
-                    <button onClick={handleClick} className="btn">VIAJAR</button>
-                </div>
-            </div>
-        </>
+        <div>
+            <Card className="card">
+                <CardHeader title="Destinos">
+                </CardHeader>
+                <CardContent>
+                    <Typography>
+                        {dataValues.nombre},{dataValues.provincia},Distancia :{dataValues.distancia}
+                    </Typography>
+                </CardContent>
+                <CardActions>
+                    <Button variant="contained" color="success" onClick={handleClick}>Viajar</Button>
+                </CardActions>
+            </Card>
+        </div>
     )
 }
 export default CardElement;

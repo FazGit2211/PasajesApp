@@ -1,6 +1,6 @@
 const urlPrincipal = 'http://localhost:8080/empresa';
 //Obtener todas las empresas
-export async function GET() {
+export async function getAll() {
     try {
         const response = await fetch(urlPrincipal + "/getAll");
         if (response.ok) {

@@ -1,7 +1,7 @@
+
 import CardContainer from "./ui/cards/cardContainer";
 
-
-export default async function Home() {
+export default function Home() {
 
   return (
     <>

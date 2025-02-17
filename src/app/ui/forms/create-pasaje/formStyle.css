@@ -6,35 +6,33 @@ form {
 
 
 button {
-    font-size: large;
-    border-radius: 3px;
-    border-style: solid;
+    font-size: 3ch;
     color: white;
     background-color: #417cea;
     margin: 1rem;
+    border-radius: 1rem;
 }
-
-select {
-    border-radius: 4px;
-    background-color: #f1f1f1;
-}
-
 
 .container {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
+    background-color: #666;
+    border-radius: 1rem;
 }
 
 div {
     margin: 3rem;
 }
-.form-label {
-    color: white;
-    font-size: medium;
+
+.form-label, select, input {
     margin: 1rem;
     display: inline-block;
-    width: 100px;
+    width: 30%;
+}
+
+.form-label {
+    color: white;
 }
 
 .btn-back {
@@ -44,4 +42,10 @@ div {
 .btn-back-link {
     color: white;
     text-decoration: none;
+}
+
+.container-div {
+    width: 80%;
+    height: 10%;
+    display: flex;
 }
