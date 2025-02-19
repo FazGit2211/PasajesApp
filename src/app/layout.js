@@ -19,12 +19,12 @@ export default function RootLayout({ children }) {
           <head>
             <meta name="viewport" content="width=device-width, initial-scale=1" />
           </head>
-          <body>
-            <header>
+          <body className='flex-cols'>
+            <header className='h-24'>
               <NavComponent />
             </header>
             <DataProvider>
-              <main>
+              <main className='flex flex-wrap justify-evenly dark:bg-gray-800'>
                 {children}
               </main>
             </DataProvider>

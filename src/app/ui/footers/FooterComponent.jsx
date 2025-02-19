@@ -1,5 +1,5 @@
 import { Email, LinkedIn } from '@mui/icons-material';
-import './footerStyle.css';
+
 const FooterContact = () => {
     return (
         <>

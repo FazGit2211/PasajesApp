@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useState } from "react";
 import { useData } from "@/app/contexts/DataContext";
-import "./formStyle.css";
 import { Button, ButtonGroup } from "@mui/material";
 import { getAll } from "@/app/api/enterpriseRoute";
 import { postPassage } from "@/app/api/passageRoute";

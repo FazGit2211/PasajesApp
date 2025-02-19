@@ -1,5 +1,5 @@
 'use client'
-import "./cardStyle.css";
+
 import { useRouter } from "next/navigation";
 import { useData } from "@/app/contexts/DataContext";
 import { Button } from "@mui/material";
@@ -12,8 +12,8 @@ const CardElement = ({ dataValues }) => {
         router.push("/pages/pasaje-compra");
     }
     return (
-        <div>
-            <Card className="card">
+        <>
+            <Card className="flex-cols flex-wrap w-md m-4">
                 <CardHeader title="Destinos">
                 </CardHeader>
                 <CardContent>
@@ -25,7 +25,7 @@ const CardElement = ({ dataValues }) => {
                     <Button variant="contained" color="success" onClick={handleClick}>Viajar</Button>
                 </CardActions>
             </Card>
-        </div>
+        </>
     )
 }
 export default CardElement;
