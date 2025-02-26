@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useData } from "@/app/contexts/DataContext";
-import { Button } from "@mui/material";
+import { Button, CardMedia } from "@mui/material";
 import { Card, CardActions, CardContent, CardHeader, Typography } from "@mui/material";
 const CardElement = ({ dataValues }) => {
     const { updateData } = useData();
@@ -14,11 +14,12 @@ const CardElement = ({ dataValues }) => {
     return (
         <>
             <Card className="flex-cols flex-wrap w-md m-4">
-                <CardHeader title="Destinos">
+                <CardHeader>
+                    <CardMedia component="img" alt="`${dataValues.nombreImagen}`" height="140" image="/public/`${dataValues.nombreImagen}`"></CardMedia>
                 </CardHeader>
                 <CardContent>
                     <Typography>
-                        {dataValues.nombre},{dataValues.provincia},Distancia :{dataValues.distancia}
+                        {dataValues.nombre},{dataValues.provincia},Distancia :{dataValues.distancia} Km
                     </Typography>
                 </CardContent>
                 <CardActions>

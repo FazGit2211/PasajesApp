@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from "react";
 import { useData } from "@/app/contexts/DataContext";
-import { Button, ButtonGroup } from "@mui/material";
+import { Box, Button, ButtonGroup, FormControl, Input, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { getAll } from "@/app/api/enterpriseRoute";
 import { postPassage } from "@/app/api/passageRoute";
 const FormCreate = () => {
@@ -12,8 +12,8 @@ const FormCreate = () => {
             exit: ""
         },
         dateExit: "",
-        paymentMethod:"",
-        price:"",
+        paymentMethod: "",
+        price: "",
         passenger: {
             name: "",
             surname: "",
@@ -122,48 +122,27 @@ const FormCreate = () => {
     }
     return (
         <>
-            <form method="POST" action="" onSubmit={handleSubmit}>
-                <div className="container">
-                    <div className="container-div">
-                        <label className="form-label">Ciudad Destino:</label>
-                        <select onChange={changeDestinyExit}>
-                            <option defaultValue="">{data.nombre}</option>
-                        </select>
-                        <label className="form-label">Fecha de Salida</label>
-                        <input type="date" onChange={changeDateExit} ></input>
-                    </div>
-                    <div>
-                        <label className="form-label">Seleccionar Empresa a cargo:</label>
-                        <select onChange={handleChangeEnterprise}>
-                            {empre.map(elem => <option key={elem.nombre}>{elem.nombre}</option>)}
-                        </select>
-                        <label className="form-label">Forma de Pago:</label>
-                        <select onChange={handleChangePaymentMethod}>
-                            <option>Débito</option>
-                            <option>Crédito</option>
-                        </select>
-                        <label className="form-label">Precio: {formValue.price}</label>
-                    </div>
-                    <div className="container-div">
-                        <label className="form-label">Nombre:</label>
-                        <input type="text" onChange={handleChangeName} ></input>
-                        <label className="form-label">Apellido:</label>
-                        <input type="text" onChange={handleChangeSurname} ></input>
-                    </div>
-                    <div className="container-div">
-                        <label className="form-label">Nº Documento:</label>
-                        <input type="number" onChange={handleChangeDni} ></input>
-                        <label className="form-label">Email:</label>
-                        <input type="email" onChange={handleChangeEmail}></input>
-                    </div>
-                    <div>
-                        <ButtonGroup>
-                            <Button variant="contained">Enviar</Button>
-                            <Button variant="contained" color="success">Atrás</Button>
-                        </ButtonGroup>
-                    </div>
+            <Box component="form" noValidate autoComplete="off" sx={{ m: 1, display: "flex", flexDirection: "column", justifyContent: "space-evenly", backgroundColor: "#ffff", width:"50%" }}>
+                <TextField id="destiny" label="Destino" defaultValue={data.nombre} helperText="Destino Actual" disabled="on">
+                </TextField>
+                <Input type="date" onChange={changeDateExit} color="Blue"></Input>
+                <TextField id="select-enterprise" select label="Empresa de Transporte" helperText="Seleccionar Empresa">
+                    {empre.map((elem) => <MenuItem key={elem.nombre}>{elem.nombre}</MenuItem>)}
+                </TextField>
+                <TextField id="payment" select label="Tipo de Tarjeta" helperText="Seleccionar Forma de Pago" onChange={handleChangePaymentMethod}>
+                    <MenuItem value="Debito">Débito</MenuItem>
+                    <MenuItem value="Credito">Crédito</MenuItem>
+                </TextField>
+                <TextField id="press" label="Precio $$$" disabled="on"></TextField>
+                <TextField required id="name" label="Required" defaultValue="Nombre" onChange={handleChangeName}></TextField>
+                <TextField required id="surname" label="Required" defaultValue="Apellido" onChange={handleChangeSurname}></TextField>
+                <TextField required id="dni" label="Required" defaultValue="Nº Documento" onChange={handleChangeDni}></TextField>
+                <TextField required id="email" label="Required" defaultValue="Email" onChange={handleChangeEmail}></TextField>
+                <div className="flex justify-evenly">
+                    <Button variant="contained">Enviar</Button>
+                    <Button variant="contained" color="success">Atrás</Button>
                 </div>
-            </form>
+            </Box >
         </>
     )
 }

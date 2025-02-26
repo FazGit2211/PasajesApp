@@ -20,15 +20,15 @@ export default function RootLayout({ children }) {
             <meta name="viewport" content="width=device-width, initial-scale=1" />
           </head>
           <body className='flex-cols'>
-            <header className='h-24'>
+            <header className='h-1/2'>
               <NavComponent />
             </header>
             <DataProvider>
-              <main className='flex flex-wrap justify-evenly dark:bg-gray-800'>
+              <main className='flex flex-wrap flex-grow justify-evenly dark:bg-gray-600 h-screen'>
                 {children}
               </main>
             </DataProvider>
-            <footer>
+            <footer className='flex justify-center m-1 h-1/2'>
               <FooterContact />
             </footer>
           </body>
