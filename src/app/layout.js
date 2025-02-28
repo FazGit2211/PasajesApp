@@ -24,11 +24,11 @@ export default function RootLayout({ children }) {
               <NavComponent />
             </header>
             <DataProvider>
-              <main className='flex flex-wrap flex-grow justify-evenly dark:bg-gray-600 h-screen'>
+              <main className='flex flex-wrap flex-grow justify-evenly dark:bg-gray-600'>
                 {children}
               </main>
             </DataProvider>
-            <footer className='flex justify-center m-1 h-1/2'>
+            <footer className='flex justify-center m-1'>
               <FooterContact />
             </footer>
           </body>

@@ -11,18 +11,19 @@ const CardElement = ({ dataValues }) => {
         updateData(dataValues);
         router.push("/pages/pasaje-compra");
     }
+
+    const pathImg = `${dataValues.nombreImagen}`;
+    const urlPath = "../../../" + pathImg;
     return (
         <>
             <Card className="flex-cols flex-wrap w-md m-4">
-                <CardHeader>
-                    <CardMedia component="img" alt="`${dataValues.nombreImagen}`" height="140" image="/public/`${dataValues.nombreImagen}`"></CardMedia>
-                </CardHeader>
+                <CardMedia component="img" alt={pathImg} image={urlPath}></CardMedia>
                 <CardContent>
                     <Typography>
                         {dataValues.nombre},{dataValues.provincia},Distancia :{dataValues.distancia} Km
                     </Typography>
                 </CardContent>
-                <CardActions>
+                <CardActions sx={{ display: "flex", justifyContent: "center" }}>
                     <Button variant="contained" color="success" onClick={handleClick}>Viajar</Button>
                 </CardActions>
             </Card>

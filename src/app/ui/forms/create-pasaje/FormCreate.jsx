@@ -1,9 +1,11 @@
 'use client';
 import { useEffect, useState } from "react";
 import { useData } from "@/app/contexts/DataContext";
-import { Box, Button, ButtonGroup, FormControl, Input, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Box, Button, MenuItem, TextField } from "@mui/material";
 import { getAll } from "@/app/api/enterpriseRoute";
 import { postPassage } from "@/app/api/passageRoute";
+import ModalAutoBus from "../../modals/ModalAutoBus";
+
 const FormCreate = () => {
 
     const { data, updateData } = useData();
@@ -22,10 +24,12 @@ const FormCreate = () => {
         },
         enterprise: {
             name: ""
-        }
+        },
     });
 
-    const [empre, setEmpre] = useState([]);
+    const [empre, setEmpre] = useState([{ "nombre": "FlechaBus", "cuilCuit": "2-14326-00" }, { "nombre": "PlusMart", "cuilCuit": "4-751942-9" }]);
+    const [modal, setModal] = useState(false);
+    /*
     useEffect(() => {
         async function fethData() {
             const enterprises = await getAll();
@@ -33,22 +37,13 @@ const FormCreate = () => {
         };
         fethData();
     }, []);
+    */
 
     //Funciones handle input form
     const handleSubmit = (e) => {
         e.preventDefault();
         updateData(formValue);
-        console.log("Enviando formulario");
-    };
-
-    const changeDestinyExit = (e) => {
-        setForm({
-            ...formValue, destiny: {
-                ...formValue.destiny,
-                exit: e.target.value
-            }
-        });
-        validInput(e);
+        console.log(formValue);
     };
 
     const changeDateExit = (e) => {
@@ -100,11 +95,12 @@ const FormCreate = () => {
     const handleChangeEnterprise = (e) => {
         setForm({
             ...formValue,
-            enterprised: {
-                ...formValue.enterprised,
+            enterprise: {
+                ...formValue.enterprise,
                 name: e.target.value,
             }
-        })
+        });
+        setModal(true);
     }
 
     const handleChangePaymentMethod = (e) => {
@@ -114,33 +110,29 @@ const FormCreate = () => {
         })
     }
 
-    const validInput = (e) => {
-        let value = e.target.value;
-        if (value.lenght == 0) {
-            console.log("Error");
-        }
-    }
+
     return (
         <>
-            <Box component="form" noValidate autoComplete="off" sx={{ m: 1, display: "flex", flexDirection: "column", justifyContent: "space-evenly", backgroundColor: "#ffff", width:"50%" }}>
-                <TextField id="destiny" label="Destino" defaultValue={data.nombre} helperText="Destino Actual" disabled="on">
+            <Box component="form" autoComplete="off" sx={{ m: 1, display: "flex", flexDirection: "column", justifyContent: "space-evenly", backgroundColor: "#ffff", width: "50%" }}>
+                <TextField label="Destino" defaultValue={data.nombre} helperText="Destino Actual" disabled="on">
                 </TextField>
-                <Input type="date" onChange={changeDateExit} color="Blue"></Input>
-                <TextField id="select-enterprise" select label="Empresa de Transporte" helperText="Seleccionar Empresa">
-                    {empre.map((elem) => <MenuItem key={elem.nombre}>{elem.nombre}</MenuItem>)}
+                <TextField type="date" value={formValue.dateExit} onChange={changeDateExit}></TextField>
+                <TextField select label="Empresa de Transporte" helperText="Seleccionar Empresa" value={formValue.enterprise.name} onChange={handleChangeEnterprise}>
+                    {empre.map((elem) => <MenuItem key={elem.nombre} value={elem.nombre}>{elem.nombre}</MenuItem>)}
                 </TextField>
-                <TextField id="payment" select label="Tipo de Tarjeta" helperText="Seleccionar Forma de Pago" onChange={handleChangePaymentMethod}>
+                <ModalAutoBus modalValue={modal}/>
+                <TextField select label="Tipo de Tarjeta" helperText="Seleccionar Forma de Pago" value={formValue.paymentMethod} onChange={handleChangePaymentMethod}>
                     <MenuItem value="Debito">Débito</MenuItem>
                     <MenuItem value="Credito">Crédito</MenuItem>
                 </TextField>
                 <TextField id="press" label="Precio $$$" disabled="on"></TextField>
-                <TextField required id="name" label="Required" defaultValue="Nombre" onChange={handleChangeName}></TextField>
-                <TextField required id="surname" label="Required" defaultValue="Apellido" onChange={handleChangeSurname}></TextField>
-                <TextField required id="dni" label="Required" defaultValue="Nº Documento" onChange={handleChangeDni}></TextField>
-                <TextField required id="email" label="Required" defaultValue="Email" onChange={handleChangeEmail}></TextField>
+                <TextField type="text" required id="name" label="Required" defaultValue={formValue.passenger.name} onChange={handleChangeName} helperText="Nombre"></TextField>
+                <TextField type="text" required id="surname" label="Required" defaultValue={formValue.passenger.surname} onChange={handleChangeSurname} helperText="Apellido"></TextField>
+                <TextField type="number" required id="dni" label="Required" defaultValue={formValue.passenger.dni} onChange={handleChangeDni} helperText="Dni"></TextField>
+                <TextField type="email" required id="email" label="Required" defaultValue={formValue.passenger.email} onChange={handleChangeEmail} helperText="Email"></TextField>
                 <div className="flex justify-evenly">
-                    <Button variant="contained">Enviar</Button>
-                    <Button variant="contained" color="success">Atrás</Button>
+                    <Button variant="contained" color="success">Enviar</Button>
+                    <Button variant="contained">Atrás</Button>
                 </div>
             </Box >
         </>
